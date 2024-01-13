@@ -40,6 +40,17 @@
             100% { transform: rotate(360deg); }
         }
 
+        #loading-overlay.fade-out {
+            animation: fadeOut 1s forwards; /* 1s duration for the fade-out */
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
         /* Navbar */
 
         header {
@@ -325,9 +336,10 @@
 
     <!-- Loading Overlay -->
 
-    <div id="loading-overlay">
+    <div id="loading-overlay" class="fade-out">
         <div class="spinner"></div>
     </div>
+  
 
     <!-- Header -->
 
@@ -609,13 +621,20 @@
         <a href="tel:919046930097">Contact: +91 9046930097</a>
     </footer>
 
+
+    <!-- Javascript -->
+
+    <!-- Loading animation  -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-           // Hide the loading overlay after the page has loaded
-           document.getElementById('loading-overlay').style.display = 'none';
+           // Add the class to start the fade-out animation after 2 seconds
+           setTimeout(function () {
+              document.getElementById('loading-overlay').classList.add('fade-out');
+           }, 3500); // 2 seconds delay
         });
-     </script>
+    </script>
 
+    <!-- Hero video and overlay and Form buttons -->
     <script>
 
         const videoSources = ['resources/videos/bg2.mp4', 'resources/videos/bg1.mp4', 'resources/videos/bg3.mp4', 'resources/videos/bg4.mp4', 'resources/videos/bg5.mp4'];
@@ -679,6 +698,7 @@
         
     </script>
 
+    <!-- Google Sheet form respnose -->
     <script>
         //Script for fetching data into Google SHeet
         //Sheet link: https://docs.google.com/spreadsheets/d/1NvxzkpWREDciVrfDWavdsoHQYerTCZ_ciu1k_cufJ1Y/edit?usp=sharing
