@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Travels Guru</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        /* Navbar */
+
+        header {
+            background-color: #72875D;
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 16px;
+            display: inline-block;
+        }
+
+        header a:hover {
+            background-color: #f7ffe1;
+            color: black;
+            border-radius: 10%;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-weight: bold;
+            color: #333; /* Dark font color */
+            font-size: 250%; /* Adjust the font size as needed */
+            margin-top: 80px; /* Adjust the margin as needed */
+        }
+
+        /* Hero Section  */
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-section video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .video-overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 400%;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            transform: translateZ(0);
+            transition: transform 0.5s;
+        }
+
+        .parallax {
+            transform: translateZ(0);
+            background-attachment: fixed;
+        }
+
+        /* Form  */
+
+        .forma-container {
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .forma-group {
+            width: 45%;  
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select,
+        input,
+        button {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-input {
+            width: 50px;
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .btn-quantity,
+        .btn-add {
+            background-color: #72875D;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #msg{
+            text-align: center;
+            display: block; 
+            margin: 0 auto;
+            color: #72875D;
+        }
+        
+        #msg.success {
+        background-color: #72875D;
+        width: 20%;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px auto;
+        color: white;
+        text-align: center;
+        transition: opacity 2s ease-in-out;
+    }
+
+        /* Gallery */
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin: 80px 0;
+        }
+
+        .grid-item {
+            position: relative;
+            /* overflow: hidden; */
+            border-radius: 20px; /* Adjust the border-radius as needed */
+            background: #f0f0f0; /* Background color for the Neomorphic effect */
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1); /* Shadow on bottom right corner */
+            text-align: center;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px; /* Match the border-radius for the image */
+        }
+
+        .grid-item p {
+            margin: 10x;
+        }
+
+        .location-name {
+            font-family: 'Whisper', sans-serif;
+            font-weight: 300;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .location-info {
+            font-family: 'Times New Roman', serif;
+            text-align: justify;
+            font-size: 14px; /* Adjust the font size as needed */
+            color: #555; /* Adjust the font color as needed */
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width:100%;
+            border-radius: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            backdrop-filter: blur(1px);
+        }
+
+        .image-overlay:hover {
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        @font-face {
+            font-family: 'Whisper';
+            src: url('Whisper/Whisper-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Footer  */
+
+        footer {
+            background-color: #72875D;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* WhatsApp button */
+
+        .float{
+            position:fixed;
+            width:60px;
+            height:60px;
+            bottom:40px;
+            right:40px;
+            background-color:#25d366;
+            color:#FFF;
+            border-radius:50px;
+            text-align:center;
+            font-size:30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index:100;
+        }
+
+        .my-float{
+            margin-top:16px;
+        }
+
+        /* Responsiveness  */
+
+        @media screen and (max-width: 768px) {
+            header {
+                padding: 10px 0;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+                padding: 10px;
+            }
+
+            #msg.success {
+            width: 75%; 
+        }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+
+    <header>
+        <a href="tours.html">Tours</a>
+        <a href="rentals.html">Rentals</a>
+        <a href="exclusive.html">Exclusive</a>
+    </header>
+
+    <!-- Hero Section  -->
+
+    <div class="hero-section">
+        <div class="video-overlay">
+            <p>My Travels Guru</p>
+        </div>
+        <video id="backgroundVideo" autoplay muted loop>
+            <source src="" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Form -->
+
+    <div class="section-heading">
+        Plan Your Vacation
+    </div>
+
+    <form name="submit-to-google-sheet" class="forma-container">
+
+            <div class="forma-group">
+
+                <!-- Destination Names -->
+                <label for="destination">Destination:</label>
+                <select id="destination" name="Destination">
+                    <option value="" disabled selected>-- Select --</option>
+                    <option value="Darjeeling">Darjeeling</option>
+                    <option value="Kalimpong">Kalimpong</option>
+                    <option value="Gangtok">Gangtok</option>
+                    <option value="Pebong">Pebong</option>
+                    <option value="Rungli">Rungli</option>
+                    <option value="Jhepi">Jhepi</option>
+                    <option value="Lava">Lava</option>
+                </select>
+            </div>
+            
+
+            <!-- Arrival Date -->
+            <div class="forma-group">
+                <label for="arrivalDate">Arrival Date:</label>
+                <input type="date" id="arrivalDate" name="ArrivalDate">
+            </div>
+
+            <!-- Name -->
+            <div class="forma-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="Name">
+            </div>
+
+            <!-- Phone Number -->
+            <div class="forma-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" id="phoneNumber" name="PhoneNumber">
+            </div>
+
+            <!-- Number of People -->
+            <div class="forma-group">
+                <label for="numberOfPeople">Number of People:</label>
+                <div class="quantity-container">
+                    <button type="button" class="btn-quantity" onclick="changeQuantityPeople(-1)">-</button>
+                    <input type="number" id="numberOfPeople" name="NumberOfPeople" class="quantity-input" value="1" min="1">
+                    <button type="button" class="btn-quantity" onclick="changeQuantityPeople(1)">+</button>
+                </div>
+            </div>
+
+            <!-- Number of Days -->
+            <div class="forma-group">
+                <label for="numberOfDays">Number of Days:</label>
+                <div class="quantity-container">
+                    <button type="button" class="btn-quantity" onclick="changeQuantityDays(-1)">-</button>
+                    <input type="number" id="numberOfDays" name="NumberOfDays" class="quantity-input" value="1" min="1">
+                    <button type="button" class="btn-quantity" onclick="changeQuantityDays(1)">+</button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-add" onclick="addToItinerary()">Add to Itinerary</button>
+    </form>
+
+    <span id="msg"></span>
+
+    <!-- Gallery  -->
+
+    <div class="section-heading">
+        Explore Amazing Locations
+    </div>
+
+    <div class="grid-container">
+        
+        <div class="grid-item">
+            <img src="loc1.jpg" alt="Location 1">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Darjeeling</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc2.jpg" alt="Location 2">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Sikkim</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc3.jpg" alt="Location 3">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Nathula Pass</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc4.jpg" alt="Location 4">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Salugara</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc5.jpg" alt="Location 5">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">ShivKhola</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc6.jpg" alt="Location 6"><div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Kanchenjunga</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc1.jpg" alt="Location 1">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Darjeeling</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc2.jpg" alt="Location 2">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Sikkim</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc3.jpg" alt="Location 3">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Nathula Pass</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc4.jpg" alt="Location 4">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Salugara</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc5.jpg" alt="Location 5">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">ShivKhola</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc6.jpg" alt="Location 6"><div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Kanchenjunga</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc1.jpg" alt="Location 1">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Darjeeling</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc2.jpg" alt="Location 2">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Sikkim</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc3.jpg" alt="Location 3">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Nathula Pass</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc4.jpg" alt="Location 4">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Salugara</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc5.jpg" alt="Location 5">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">ShivKhola</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc6.jpg" alt="Location 6"><div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Kanchenjunga</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc1.jpg" alt="Location 1">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Darjeeling</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc2.jpg" alt="Location 2">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Sikkim</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc3.jpg" alt="Location 3">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Nathula Pass</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc4.jpg" alt="Location 4">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Salugara</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc5.jpg" alt="Location 5">
+            <div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">ShivKhola</div> 
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <img src="loc6.jpg" alt="Location 6"><div class="image-overlay">
+                <div class="location-name" style="font-size: xx-large;">Kanchenjunga</div> 
+            </div>
+        </div>
+
+        <!-- Add more grid items as needed -->
+    </div>
+
+    <!-- Floating WhatsApp button -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <a href="https://api.whatsapp.com/send?phone=919046930097&text=Hola%20Prosenjit%21%20Please%20help%20me%20with%20a%20trip%20to%20my%20dream%20destination." class="float" target="_blank">
+    <i class="fa fa-whatsapp my-float"></i>
+    </a>        
+
+    <!-- Footer -->
+
+    <footer>
+        <a href="https://www.facebook.com/mytravelsguru" target="_blank">Facebook</a>
+        <a href="mailto:mytravelsguru@gmail.com" target="_blank">Mail</a>
+        <a href="https://www.instagram.com/mytravelsguru/" target="_blank">Instagram</a>
+        <br>
+        <a href="https://maps.app.goo.gl/MAr7DNUq3RJWVERX7">Address: Sreema Sarani, Haidar Para, Siliguri, WB -734006</a>
+        <br>
+        <a href="tel:919046930097">Contact: +91 9046930097</a>
+    </footer>
+
+    <script>
+
+        const videoSources = ['bg2.mp4', 'bg1.mp4', 'bg3.mp4', 'bg4.mp4', 'bg5.mp4'];
+        const video = document.getElementById('backgroundVideo');
+        let currentIndex = 0;
+
+        function playNextVideo() {
+            currentIndex = (currentIndex + 1) % videoSources.length;
+            video.src = videoSources[currentIndex];
+            video.load();
+            video.play();
+        }
+
+        // Play the first video
+        video.src = videoSources[currentIndex];
+        video.load(); // Load the video to ensure 'ended' event is fired
+        video.play();
+        // Switch to the next video when the current one ends
+        video.addEventListener('ended', playNextVideo);
+
+        window.addEventListener('scroll', function () {
+            const scrollPosition = window.scrollY;
+            const parallaxValue = scrollPosition * 0.4; // Adjust the multiplier for the desired effect
+            document.querySelector('.video-overlay').style.transform = `translateY(${parallaxValue}px)`;
+        });
+
+
+        //plus minus buttons for the people 
+        function changeQuantityPeople(value) {
+            const quantityInput = document.getElementById('numberOfPeople');
+            const currentValue = parseInt(quantityInput.value, 10);
+            const newValue = Math.max(currentValue + value, 1);
+            quantityInput.value = newValue;
+        }
+
+        //plus minus buttons for the days 
+        function changeQuantityDays(value) {
+            const quantityInput = document.getElementById('numberOfDays');
+            const currentValue = parseInt(quantityInput.value, 10);
+            const newValue = Math.max(currentValue + value, 1);
+            quantityInput.value = newValue;
+        }
+
+        // Add to itinerary button
+        function addToItinerary() {
+            // Add your logic to handle the form submission or itinerary update
+            // You can access form data using document.getElementById('<element-id>').value
+            // For example: const destination = document.getElementById('destination').value;
+        }
+
+        // Date
+
+        document.addEventListener('DOMContentLoaded', function () {
+        // Get the current date in the format YYYY-MM-DD
+        var currentDate = new Date().toISOString().split('T')[0];
+        
+        // Set the minimum date for the arrivalDate input
+        document.getElementById('arrivalDate').min = currentDate;
+    });
+
+        
+    </script>
+
+    <script>
+        //Script for fetching data into Google SHeet
+        //Sheet link: https://docs.google.com/spreadsheets/d/1NvxzkpWREDciVrfDWavdsoHQYerTCZ_ciu1k_cufJ1Y/edit?usp=sharing
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyUOGJo3s2hOxweKnbHIGJmFADpprIxfhmmOqn60HBP94nJSQjEl1edOU6IHFmcVhsYjA/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    msg.innerHTML = "Lovely Choice!! <br> We'll contact you regarding the same shortly. <br> Have a Nice Day!";
+                    msg.classList.add('success');
+                    setTimeout(function () {
+                        msg.style.opacity = 0; 
+                        setTimeout(function () {
+                            msg.innerHTML = "";
+                            msg.classList.remove('success');
+                            msg.style.opacity = 1; 
+                        }, 2000); 
+                    }, 7000); 
+                    form.reset();
+                })
+                .catch(error => console.error('Error!', error.message))
+        });
+    </script>
+</body>
+
+</html>

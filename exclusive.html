@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Travels Guru</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        /* Navbar */
+
+        header {
+            background-color: #72875D;
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 16px;
+            display: inline-block;
+        }
+
+        header a:hover {
+            background-color: #f7ffe1;
+            color: black;
+            border-radius: 10%;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-weight: bold;
+            color: #333; /* Dark font color */
+            font-size: 250%; /* Adjust the font size as needed */
+            margin-top: 80px; /* Adjust the margin as needed */
+        }
+
+        
+        @font-face {
+            font-family: 'Whisper';
+            src: url('Whisper/Whisper-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Hero section */
+
+
+
+        /* Footer  */
+
+        footer {
+            background-color: #72875D;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* WhatsApp button */
+
+        .float{
+            position:fixed;
+            width:60px;
+            height:60px;
+            bottom:40px;
+            right:40px;
+            background-color:#25d366;
+            color:#FFF;
+            border-radius:50px;
+            text-align:center;
+            font-size:30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index:100;
+        }
+
+        .my-float{
+            margin-top:16px;
+        }
+
+        /* Responsiveness  */
+
+        @media screen and (max-width: 768px) {
+            header {
+                padding: 10px 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+
+    <header>
+        <a href="tours.html">Tours</a>
+        <a href="rentals.html">Rentals</a>
+        <a href="index.html">Home</a>
+    </header>
+
+    <!-- Hero Section  -->
+
+    
+
+    <!-- Form -->
+
+
+
+    <!-- Floating WhatsApp button -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <a href="https://api.whatsapp.com/send?phone=919046930097&text=Hola%20Prosenjit%21%20Please%20help%20me%20with%20a%20trip%20to%20my%20dream%20destination." class="float" target="_blank">
+    <i class="fa fa-whatsapp my-float"></i>
+    </a>        
+
+    <!-- Footer -->
+
+    <footer>
+        <a href="https://www.facebook.com/mytravelsguru" target="_blank">Facebook</a>
+        <a href="mailto:mytravelsguru@gmail.com" target="_blank">Mail</a>
+        <a href="https://www.instagram.com/mytravelsguru/" target="_blank">Instagram</a>
+        <br>
+        <a href="https://maps.app.goo.gl/MAr7DNUq3RJWVERX7">Address: Sreema Sarani, Haidar Para, Siliguri, WB -734006</a>
+        <br>
+        <a href="tel:919046930097">Contact: +91 9046930097</a>
+    </footer>
+
+    <script>
+
+        const videoSources = ['bg2.mp4', 'bg1.mp4', 'bg3.mp4', 'bg4.mp4', 'bg5.mp4'];
+        const video = document.getElementById('backgroundVideo');
+        let currentIndex = 0;
+
+        function playNextVideo() {
+            currentIndex = (currentIndex + 1) % videoSources.length;
+            video.src = videoSources[currentIndex];
+            video.load();
+            video.play();
+        }
+
+        // Play the first video
+        video.src = videoSources[currentIndex];
+        video.load(); // Load the video to ensure 'ended' event is fired
+        video.play();
+        // Switch to the next video when the current one ends
+        video.addEventListener('ended', playNextVideo);
+
+        window.addEventListener('scroll', function () {
+            const scrollPosition = window.scrollY;
+            const parallaxValue = scrollPosition * 0.4; // Adjust the multiplier for the desired effect
+            document.querySelector('.video-overlay').style.transform = `translateY(${parallaxValue}px)`;
+        });
+
+
+        //plus minus buttons for the people 
+        function changeQuantityPeople(value) {
+            const quantityInput = document.getElementById('numberOfPeople');
+            const currentValue = parseInt(quantityInput.value, 10);
+            const newValue = Math.max(currentValue + value, 1);
+            quantityInput.value = newValue;
+        }
+
+        //plus minus buttons for the days 
+        function changeQuantityDays(value) {
+            const quantityInput = document.getElementById('numberOfDays');
+            const currentValue = parseInt(quantityInput.value, 10);
+            const newValue = Math.max(currentValue + value, 1);
+            quantityInput.value = newValue;
+        }
+
+        // Add to itinerary button
+        function addToItinerary() {
+            // Add your logic to handle the form submission or itinerary update
+            // You can access form data using document.getElementById('<element-id>').value
+            // For example: const destination = document.getElementById('destination').value;
+        }
+
+        // Date
+
+        document.addEventListener('DOMContentLoaded', function () {
+        // Get the current date in the format YYYY-MM-DD
+        var currentDate = new Date().toISOString().split('T')[0];
+        
+        // Set the minimum date for the arrivalDate input
+        document.getElementById('arrivalDate').min = currentDate;
+    });
+
+        
+    </script>
+
+    <script>
+        //Script for fetching data into Google SHeet
+        //Sheet link: https://docs.google.com/spreadsheets/d/1NvxzkpWREDciVrfDWavdsoHQYerTCZ_ciu1k_cufJ1Y/edit?usp=sharing
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyUOGJo3s2hOxweKnbHIGJmFADpprIxfhmmOqn60HBP94nJSQjEl1edOU6IHFmcVhsYjA/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    msg.innerHTML = "Lovely Choice!! <br> We'll contact you regarding the same shortly. <br> Have a Nice Day!";
+                    msg.classList.add('success');
+                    setTimeout(function () {
+                        msg.style.opacity = 0; 
+                        setTimeout(function () {
+                            msg.innerHTML = "";
+                            msg.classList.remove('success');
+                            msg.style.opacity = 1; 
+                        }, 2000); 
+                    }, 7000); 
+                    form.reset();
+                })
+                .catch(error => console.error('Error!', error.message))
+        });
+    </script>
+</body>
+
+</html>
