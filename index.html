@@ -431,7 +431,7 @@
     <!-- Gallery  -->
 
     <div class="section-heading">
-        Explore The Queen of Hills
+        Explore The Unfathomed!
     </div>
 
     <div class="grid-container">
@@ -624,13 +624,17 @@
 
     <!-- Javascript -->
 
-    <!-- Loading animation  -->
+    <!-- Loading animation and Right Click block -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
            // Add the class to start the fade-out animation after 2 seconds
            setTimeout(function () {
               document.getElementById('loading-overlay').classList.add('fade-out');
            }, 3500); // 2 seconds delay
+        });
+
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault(); // Prevent the default context menu behavior
         });
     </script>
 
@@ -660,7 +664,34 @@
             const parallaxValue = scrollPosition * 0.4; // Adjust the multiplier for the desired effect
             document.querySelector('.video-overlay').style.transform = `translateY(${parallaxValue}px)`;
         });
+    </script>
 
+    <!-- Google Sheet form related -->
+    <script>
+        //Script for fetching data into Google SHeet
+        //Sheet link: https://docs.google.com/spreadsheets/d/1NvxzkpWREDciVrfDWavdsoHQYerTCZ_ciu1k_cufJ1Y/edit?usp=sharing
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyUOGJo3s2hOxweKnbHIGJmFADpprIxfhmmOqn60HBP94nJSQjEl1edOU6IHFmcVhsYjA/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    msg.innerHTML = "Lovely Choice!! <br> We'll contact you regarding the same shortly. <br> Have a Nice Day!";
+                    msg.classList.add('success');
+                    setTimeout(function () {
+                        msg.style.opacity = 0; 
+                        setTimeout(function () {
+                            msg.innerHTML = "";
+                            msg.classList.remove('success');
+                            msg.style.opacity = 1; 
+                        }, 2000); 
+                    }, 7000); 
+                    form.reset();
+                })
+                .catch(error => console.error('Error!', error.message))
+        });
 
         //plus minus buttons for the people 
         function changeQuantityPeople(value) {
@@ -694,36 +725,7 @@
         // Set the minimum date for the arrivalDate input
         document.getElementById('arrivalDate').min = currentDate;
     });
-
-        
-    </script>
-
-    <!-- Google Sheet form respnose -->
-    <script>
-        //Script for fetching data into Google SHeet
-        //Sheet link: https://docs.google.com/spreadsheets/d/1NvxzkpWREDciVrfDWavdsoHQYerTCZ_ciu1k_cufJ1Y/edit?usp=sharing
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyUOGJo3s2hOxweKnbHIGJmFADpprIxfhmmOqn60HBP94nJSQjEl1edOU6IHFmcVhsYjA/exec'
-        const form = document.forms['submit-to-google-sheet']
-        const msg = document.getElementById("msg")
-
-        form.addEventListener('submit', e => {
-            e.preventDefault()
-            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => {
-                    msg.innerHTML = "Lovely Choice!! <br> We'll contact you regarding the same shortly. <br> Have a Nice Day!";
-                    msg.classList.add('success');
-                    setTimeout(function () {
-                        msg.style.opacity = 0; 
-                        setTimeout(function () {
-                            msg.innerHTML = "";
-                            msg.classList.remove('success');
-                            msg.style.opacity = 1; 
-                        }, 2000); 
-                    }, 7000); 
-                    form.reset();
-                })
-                .catch(error => console.error('Error!', error.message))
-        });
+    
     </script>
 </body>
 

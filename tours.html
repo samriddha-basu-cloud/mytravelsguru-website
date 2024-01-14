@@ -12,6 +12,45 @@
             font-family: 'Times New Roman', serif;
         }
 
+        /* Loading Overlay Styles */
+        #loading-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #loading-overlay.fade-out {
+            animation: fadeOut 1s forwards; /* 1s duration for the fade-out */
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
         /* Navbar */
 
         header {
@@ -105,6 +144,12 @@
 </head>
 
 <body>
+    <!-- Loading Overlay -->
+
+    <div id="loading-overlay" class="fade-out">
+        <div class="spinner"></div>
+    </div>
+  
     <!-- Header -->
 
     <header>
@@ -139,93 +184,19 @@
         <a href="tel:919046930097">Contact: +91 9046930097</a>
     </footer>
 
+    <!-- Javascript -->
+
+    <!-- Loading animation and Right Click block -->
     <script>
-
-        const videoSources = ['bg2.mp4', 'bg1.mp4', 'bg3.mp4', 'bg4.mp4', 'bg5.mp4'];
-        const video = document.getElementById('backgroundVideo');
-        let currentIndex = 0;
-
-        function playNextVideo() {
-            currentIndex = (currentIndex + 1) % videoSources.length;
-            video.src = videoSources[currentIndex];
-            video.load();
-            video.play();
-        }
-
-        // Play the first video
-        video.src = videoSources[currentIndex];
-        video.load(); // Load the video to ensure 'ended' event is fired
-        video.play();
-        // Switch to the next video when the current one ends
-        video.addEventListener('ended', playNextVideo);
-
-        window.addEventListener('scroll', function () {
-            const scrollPosition = window.scrollY;
-            const parallaxValue = scrollPosition * 0.4; // Adjust the multiplier for the desired effect
-            document.querySelector('.video-overlay').style.transform = `translateY(${parallaxValue}px)`;
+        document.addEventListener('DOMContentLoaded', function () {
+           // Add the class to start the fade-out animation after 2 seconds
+           setTimeout(function () {
+              document.getElementById('loading-overlay').classList.add('fade-out');
+           }, 3500); // 2 seconds delay
         });
 
-
-        //plus minus buttons for the people 
-        function changeQuantityPeople(value) {
-            const quantityInput = document.getElementById('numberOfPeople');
-            const currentValue = parseInt(quantityInput.value, 10);
-            const newValue = Math.max(currentValue + value, 1);
-            quantityInput.value = newValue;
-        }
-
-        //plus minus buttons for the days 
-        function changeQuantityDays(value) {
-            const quantityInput = document.getElementById('numberOfDays');
-            const currentValue = parseInt(quantityInput.value, 10);
-            const newValue = Math.max(currentValue + value, 1);
-            quantityInput.value = newValue;
-        }
-
-        // Add to itinerary button
-        function addToItinerary() {
-            // Add your logic to handle the form submission or itinerary update
-            // You can access form data using document.getElementById('<element-id>').value
-            // For example: const destination = document.getElementById('destination').value;
-        }
-
-        // Date
-
-        document.addEventListener('DOMContentLoaded', function () {
-        // Get the current date in the format YYYY-MM-DD
-        var currentDate = new Date().toISOString().split('T')[0];
-        
-        // Set the minimum date for the arrivalDate input
-        document.getElementById('arrivalDate').min = currentDate;
-    });
-
-        
-    </script>
-
-    <script>
-        //Script for fetching data into Google SHeet
-        //Sheet link: https://docs.google.com/spreadsheets/d/1NvxzkpWREDciVrfDWavdsoHQYerTCZ_ciu1k_cufJ1Y/edit?usp=sharing
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyUOGJo3s2hOxweKnbHIGJmFADpprIxfhmmOqn60HBP94nJSQjEl1edOU6IHFmcVhsYjA/exec'
-        const form = document.forms['submit-to-google-sheet']
-        const msg = document.getElementById("msg")
-
-        form.addEventListener('submit', e => {
-            e.preventDefault()
-            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => {
-                    msg.innerHTML = "Lovely Choice!! <br> We'll contact you regarding the same shortly. <br> Have a Nice Day!";
-                    msg.classList.add('success');
-                    setTimeout(function () {
-                        msg.style.opacity = 0; 
-                        setTimeout(function () {
-                            msg.innerHTML = "";
-                            msg.classList.remove('success');
-                            msg.style.opacity = 1; 
-                        }, 2000); 
-                    }, 7000); 
-                    form.reset();
-                })
-                .catch(error => console.error('Error!', error.message))
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault(); // Prevent the default context menu behavior
         });
     </script>
 </body>
