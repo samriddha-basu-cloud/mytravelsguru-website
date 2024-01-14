@@ -116,42 +116,55 @@
 
         /* Cars section styles */
 
-        .cars-heading{
+        .cars-heading {
             text-align: center;
             font-weight: bold;
-            color: #333; /* Dark font color */
-            font-size: 250%; /* Adjust the font size as needed */
-            margin: 50px; /* Adjust the margin as needed */
+            color: #333;
+            font-size: 250%;
+            margin: 50px;
         }
 
         .cars-section {
-            padding: 50px 0; /* Adjust padding as needed */
-            background-color: #f5f5f5; /* Set background color for the section */
+            padding: 50px 0;
+            background-color: #f5f5f5;
         }
 
         .car-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 800px; /* Set a maximum width for the grid */
-            margin: 0 auto; /* Center the grid on the page */
+            gap: 30px; /* Increased gap */
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .car-item {
-            border: 1px solid #ddd; /* Add border for each car item */
+            border: 1px solid #ddd;
             padding: 15px;
             text-align: center;
-            box-sizing: border-box; /* Include padding in the box model */
+            box-sizing: border-box;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for smooth hover effect */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow */
         }
 
         .car-item img {
             max-width: 100%;
             height: auto;
+            border-radius: 10px; /* Rounded corners for images */
         }
 
         .car-details {
             margin-top: 15px;
         }
+
+        /* Hover effect */
+        .car-item:hover {
+            transform: scale(1.05); /* Scale up on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+            background-color: #72875D; /* Change background color on hover */
+            color: white; /* Change text color on hover */
+        }
+
 
 
 
@@ -207,7 +220,12 @@
             }
             .car-grid {
                 grid-template-columns: 1fr;
+                padding: 0 20px; /* Add space on right and left */
             }
+            .car-item {
+                margin-bottom: 20px; /* Add some space between items */
+            }
+
         }
 
     </style>
@@ -239,7 +257,7 @@
 
     <!-- Cars Section -->
     <section class="cars-section">
-        <div class="cars-heading">We Offer Safety and Reliance</div>
+        <div class="cars-heading">Committed to Safety and Reliance</div>
 
         <div class="car-grid">
             <!-- Car 1 -->
@@ -247,8 +265,7 @@
                 <img src="resources/images/rent2.png" alt="Maruti Suzuki Wagon R">
                 <div class="car-details">
                     <h2>Maruti Suzuki Wagon R</h2>
-                    <p>Type: Hatchback</p>
-                    <p>Capacity: 4 persons</p>
+                    <p>Type: Hatchback |  Capacity: 4 persons</p>
                 </div>
             </div>
 
@@ -257,8 +274,7 @@
                 <img src="resources/images/rent3.png" alt="Maruti Suzuki Desire">
                 <div class="car-details">
                     <h2>Maruti Suzuki Desire</h2>
-                    <p>Type: Sedan</p>
-                    <p>Capacity: 4 persons</p>
+                    <p>Type: Sedan | Capacity: 4 persons</p>
                 </div>
             </div>
 
@@ -267,8 +283,7 @@
                 <img src="resources/images/rent6.png" alt="Hyundai Xcent">
                 <div class="car-details">
                     <h2>Hyundai Xcent</h2>
-                    <p>Type: Sedan</p>
-                    <p>Capacity: 4 persons</p>
+                    <p>Type: Sedan | Capacity: 4 persons</p>
                 </div>
             </div>
 
@@ -277,8 +292,7 @@
                 <img src="resources/images/rent4.png" alt="Tata Sumo Gold">
                 <div class="car-details">
                     <h2>Tata Sumo Gold</h2>
-                    <p>Type: SUV</p>
-                    <p>Capacity: 7 persons</p>
+                    <p>Type: SUV | Capacity: 7 persons</p>
                 </div>
             </div>
 
@@ -287,8 +301,7 @@
                 <img src="resources/images/rent5.png" alt="Toyota Innova">
                 <div class="car-details">
                     <h2>Toyota Innova</h2>
-                    <p>Type: SUV</p>
-                    <p>Capacity: 7 persons</p>
+                    <p>Type: SUV | Capacity: 7 persons</p>
                 </div>
             </div>
 
@@ -297,8 +310,7 @@
                 <img src="resources/images/rent7.png" alt="Car 6">
                 <div class="car-details">
                     <h2>Mahindra Bolero</h2>
-                    <p>Type: SUV</p>
-                    <p>Capacity: 7 persons</p>
+                    <p>Type: SUV | Capacity: 7 persons</p>
                 </div>
             </div>
 
