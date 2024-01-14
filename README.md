@@ -38,12 +38,12 @@ To get started with the website locally, follow these steps:
 - Enjoy the beautiful gallery showcasing amazing locations.
 
 ## Gallery
-![Darjeeling](loc1.jpg)
-![Sikkim](loc2.jpg)
-![Nathula Pass](loc3.jpg)
-![Salugara](loc4.jpg)
-![ShivKhola](loc5.jpg)
-![Kanchenjunga](loc6.jpg)
+![Darjeeling](resources/images/loc1.jpg)
+![Sikkim](resources/images/loc2.jpg)
+![Nathula Pass](resources/images/loc3.jpg)
+![Salugara](resources/images/loc4.jpg)
+![ShivKhola](resources/images/loc5.jpg)
+![Kanchenjunga](resources/images/loc6.jpg)
 
 ## Contact
 - **Facebook**: [My Travels Guru - Facebook](https://www.facebook.com/mytravelsguru)
